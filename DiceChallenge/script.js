@@ -20,7 +20,7 @@ btn.onclick = () => {
     let randomNumberResult = randomNumber();
     elemento.lastElementChild.setAttribute(
       "src",
-      `/Dice/images/dice${randomNumberResult}.png`
+      `/DiceChallenge/images/dice${randomNumberResult}.png`
     );
     elemento.lastElementChild.setAttribute("id", randomNumberResult);
   });
@@ -38,8 +38,17 @@ let setWinner = () => {
     console.log(arrayTemp);
   });
 
+  const drawResult = (arrayCheck) =>
+    arrayCheck.every((element) => element === arrayTemp[0]); //check if there is a draw
+
   let winner = Math.max(...arrayTemp);
-  let imageElement = document.getElementById(winner);
-  let paragraphElement = imageElement.previousElementSibling.innerHTML;
-  document.getElementById("result").innerHTML = paragraphElement + " wins!!";
+
+  if (drawResult(arrayTemp)) {
+    //true or false on check draw
+    document.getElementById("result").innerHTML = "It's a Draw!!";
+  } else {
+    let imageElement = document.getElementById(winner);
+    let paragraphElement = imageElement.previousElementSibling.innerHTML;
+    document.getElementById("result").innerHTML = paragraphElement + " wins!!";
+  }
 };
